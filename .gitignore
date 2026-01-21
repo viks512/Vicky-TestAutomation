@@ -1,0 +1,11 @@
+/test-results/
+node_modules/
+/.vscode/
+.DS_Store
+.tmp/
+ 
+# Playwright
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

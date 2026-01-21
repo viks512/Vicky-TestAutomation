@@ -1,0 +1,22 @@
+{
+  "name": "vicky-testautomation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viks512/Vicky-TestAutomation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viks512/Vicky-TestAutomation/issues"
+  },
+  "homepage": "https://github.com/viks512/Vicky-TestAutomation#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.9"
+  }
+}
