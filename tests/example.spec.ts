@@ -87,3 +87,24 @@ test('modal window', async ({ page }) => {
   await closeButton.click();
   await expect(modal).toBeHidden();
 });
+
+test('login in kazancasino', async ({ page }) => {
+  await page.goto('https://kazancasino-stage.fsclub.tech/');
+
+  const iframe = page.frameLocator('#newLoginIframe');
+  const loginButton = page.locator('.user-login-button #buttonHeaderLogin');
+
+  const usernameField = iframe.getByTestId('userName')
+  const passwordField = iframe.getByTestId('password')
+  const submitButton = iframe.getByTestId('login-submit-button');
+
+  await loginButton.click();
+  await usernameField.fill('vicky');
+  await passwordField.fill('Password01');
+  await submitButton.click();
+
+  const loggedinUserName = page.getByTestId('loggedUserName');
+  await expect(loggedinUserName, 'User is not logged in successfully').toBeVisible({  timeout: 15000 });
+  await expect(loggedinUserName).toHaveText('vicky');
+
+});
