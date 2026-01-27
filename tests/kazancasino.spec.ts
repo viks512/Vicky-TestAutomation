@@ -11,8 +11,8 @@ test('login', async ({ page }) => {
   const submitButton = iframe.getByTestId('login-submit-button');
 
   await loginButton.click();
-  await usernameField.fill('vicky');
-  await passwordField.fill('Password01');
+  await usernameField.fill('------');
+  await passwordField.fill('--------');
   await submitButton.click();
 
   const loggedinUserName = page.getByTestId('loggedUserName');
