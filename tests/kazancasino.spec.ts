@@ -11,13 +11,13 @@ test('login', async ({ page }) => {
   const submitButton = iframe.getByTestId('login-submit-button');
 
   await loginButton.click();
-  await usernameField.fill('vicky');
-  await passwordField.fill('Password01');
+  await usernameField.fill('-------');
+  await passwordField.fill('--------');
   await submitButton.click();
 
   const loggedinUserName = page.getByTestId('loggedUserName');
   await expect(loggedinUserName, 'User is not logged in successfully').toBeVisible({  timeout: 15000 });
-  await expect(loggedinUserName).toHaveText('vicky');
+  await expect(loggedinUserName).toHaveText('------');
 });
 
 test('registration', async ({ page }) => {
@@ -42,18 +42,18 @@ test('registration', async ({ page }) => {
     const attestationCheckbox = iframe.getByTestId('acceptAttestation');
 
     await registerButton.click();
-    await usernameEmail.fill(`${Date.now()}@testttt.testing`);
-    await passwordField.fill('Abcd1234!');
-    await usernameField.fill(`V${Date.now()}`);
-    await firstNameField.fill('fvgs');
-    await lastNameField.fill('sdfsdf');
-    await dateOfBirthMonth.fill('01');
-    await dateOfBirthDay.fill('01');
-    await dateOfBirthYear.fill('1990');
-    await address.fill('sdfsdf');
-    await city.fill('sdfsdf');
-    await postalCode.fill('12345');
-    await phoneNumber.fill('5556665550');
+    await usernameEmail.fill(`-----------`);
+    await passwordField.fill('---------');
+    await usernameField.fill(`----------`);
+    await firstNameField.fill('----');
+    await lastNameField.fill('-------');
+    await dateOfBirthMonth.fill('--');
+    await dateOfBirthDay.fill('--');
+    await dateOfBirthYear.fill('--');
+    await address.fill('-----');
+    await city.fill('----');
+    await postalCode.fill('-----');
+    await phoneNumber.fill('--------');
     await termsCheckbox.click();
     await attestationCheckbox.click();
 
@@ -121,18 +121,18 @@ test('existing user registration', async ({ page }) => {
     const attestationCheckbox = iframe.getByTestId('acceptAttestation');
 
     await registerButton.click();
-    await usernameEmail.fill(`${Date.now()}@testttt.testing`);
-    await passwordField.fill('Abcd1234!');
-    await usernameField.fill(`V1769431164226`);
-    await firstNameField.fill('fvgs');
-    await lastNameField.fill('sdfsdf');
-    await dateOfBirthMonth.fill('01');
-    await dateOfBirthDay.fill('01');
-    await dateOfBirthYear.fill('1990');
-    await address.fill('sdfsdf');
-    await city.fill('sdfsdf');
-    await postalCode.fill('12345');
-    await phoneNumber.fill('5556665550');
+    await usernameEmail.fill(`-------`);
+    await passwordField.fill('-------');
+    await usernameField.fill(`-------`);
+    await firstNameField.fill('-------');
+    await lastNameField.fill('-------');
+    await dateOfBirthMonth.fill('--');
+    await dateOfBirthDay.fill('--');
+    await dateOfBirthYear.fill('----');
+    await address.fill('---');
+    await city.fill('-------');
+    await postalCode.fill('-------');
+    await phoneNumber.fill('-------');
     await termsCheckbox.click();
     await attestationCheckbox.click();
 
