@@ -1,47 +1,46 @@
 import { test, expect } from "@playwright/test";
+import { LandingPage } from "../pages/landingPage";
+import { RegisterModal } from "../pages/registerModal";
+import { Navigation } from "../pages/navigationComponent";
 
-test.describe('Register Smoke', () => {
+test.describe('Register Smoke Tests', () => {
+  let landingPage: LandingPage;
+  let registerModal: RegisterModal;
+  let navigation: Navigation;
 
-  test('registration', { tag: '@smoke' }, async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
+    landingPage = new LandingPage(page);
+    await landingPage.navigateToHomepage(); // zashto
+    registerModal = await landingPage.openRegister();
+  });
 
-    await page.goto('https://kazancasino-stage.fsclub.tech/');
+  test('registration', async ({ page }) => {
 
-    const iframe = page.frameLocator('#newRegistrationIframe');
-    const registerButton = page.locator('.register-button-holder #buttonHeaderRegister');
+    await registerModal.registerUser(
+      'v@fsdf.com',
+      "Test1234!",
+      'TestUser',
+      'Test',
+      'User',
+      '01',
+      '01',
+      '1990',
+      '123 Test St',
+      'Test City',
+      '12345',
+      'US',
+      '1234567890'
+    );
 
-    await registerButton.click();
-
-    await iframe.getByTestId('email').fill(`${Date.now()}@testttt.testing`);
-
-    await iframe.getByTestId('password').fill('-------'); 
-    await iframe.getByTestId('userName').fill(`V${Date.now()}`);
-
-    await iframe.getByTestId('firstName').fill('fvgs');
-    await iframe.getByTestId('lastName').fill('sdfsdf');
-
-    await iframe.getByTestId('dateOfBirth-MM').fill('01');
-    await iframe.getByTestId('dateOfBirth-DD').fill('01');
-    await iframe.getByTestId('dateOfBirth-YYYY').fill('1990');
-
-    await iframe.getByTestId('address').fill('sdfsdf');
-    await iframe.getByTestId('city').fill('sdfsdf');
-    await iframe.getByTestId('zipCode').fill('12345');
-    await iframe.getByTestId('phone').fill('5556665550');
-
-    await iframe.getByTestId('acceptTermsAndConditions').click();
-    await iframe.getByTestId('acceptAttestation').click();
-
-    await iframe.getByTestId('registration-submit-button').click();
-
-    await expect(page.getByTestId('loggedUserName')).toBeVisible({ timeout: 15000 });
+    await expect(landingPage.getLoggedUserName()).toBeVisible({ timeout: 15000 });
   });
 
 
-  test('register button visible', { tag: '@smoke' }, async ({ page }) => {
+  test('register button visible', async ({ page }) => {
 
-    await page.goto('https://kazancasino-stage.fsclub.tech/');
+    const registerButton = page.locator('.register-button-holder #buttonHeaderRegister');
 
-    await expect(page.locator('.register-button-holder #buttonHeaderRegister')).toBeVisible();
+    await expect(registerButton).toBeVisible();
   });
 
 });
