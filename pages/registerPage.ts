@@ -1,5 +1,5 @@
 import { FrameLocator, Locator, Page } from '@playwright/test';
-import { BasePage } from './basePage';
+import { LandingPage } from './landingPage';
 
 const REGISTER_MODAL_SELECTORS = {
     iframe: `iframe#newRegistrationIframe`,
@@ -30,7 +30,7 @@ const REGISTER_MODAL_TEST_IDS = {
 
 };
 
-export class RegisterPage extends BasePage {
+export class RegisterPage extends LandingPage {
     constructor(page: Page) {
         super(page);
     }

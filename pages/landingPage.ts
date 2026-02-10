@@ -28,10 +28,8 @@ export class LandingPage extends HomePage {
     return this.page.locator(LANDING_SELECTORS.loginButton);
   }
 
-  async openRegister(): Promise<RegisterPage> {
+  async openRegister(): Promise<void> {
     await this.registerButton().click();
-
-    return new RegisterPage(this.page);
   }
 
   async openLogin(): Promise<void> {
