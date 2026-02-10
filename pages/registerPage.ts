@@ -95,7 +95,7 @@ export class RegisterPage extends LandingPage {
         await this.createAccountButton.click();
     }
  
-    async fillRegistrationFormField(
+    async fillRegistrationFormField( //return if visible error messages
         email: string,
         password:  string,
         username: string,
@@ -117,6 +117,7 @@ export class RegisterPage extends LandingPage {
         await this.birthdayMonthFieldInput.fill(birthMonth);
         await this.birthdayDayFieldInput.fill(birthDay);
         await this.birthdayYearFieldInput.fill(birthYear);
+        //if
         await this.addressInput.fill(address);
         await this.cityFieldInput.fill(city);
         await this.zipCodeFieldInput.fill(zipCode);

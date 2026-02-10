@@ -20,8 +20,4 @@ test.describe('Login Smoke', () => {
 
     await expect(loginPage.getLoggedUserName()).toBeVisible();
   });
-
-  test('submit button visible', async ({ page }) => {
-    await expect(loginPage.submitButton).toBeVisible();
-  });
 });

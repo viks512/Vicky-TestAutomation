@@ -62,7 +62,7 @@ export class LoginPage extends LandingPage {
     }
 
     async deleteLoginDetails() {
-        await this.emailField.fill('');
+        await this.emailField.fill(''); // or .clear() if available
         await this.passwordField.fill('');
     }
 

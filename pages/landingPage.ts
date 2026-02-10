@@ -1,5 +1,4 @@
 import { Locator, Page } from '@playwright/test';
-import { RegisterPage } from './registerPage';
 import { HomePage } from './homePage';
 
 const LANDING_SELECTORS = {
@@ -33,7 +32,7 @@ export class LandingPage extends HomePage {
   }
 
   async openLogin(): Promise<void> {
-  await this.loginButton().click();
+    await this.loginButton().click();
   }
 
   getLoggedUserName(): Locator {

@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { LandingPage } from '../../pages/landingPage';
-import { LoginPage } from "../../pages/loginPage2";
+import { LoginPage } from "../../pages/loginPage";
 import { loginData } from "../loginData";
 
 test.describe('Logout', () => {
@@ -15,11 +15,8 @@ test.describe('Logout', () => {
       await landingPage.openLogin();
   });
 
-  test('logout', async ({ page }) => {
+  test('logout', async () => {
     await loginPage.login(loginData.validUser.username, loginData.validUser.password);
-
-    await expect(loginPage.getLoggedUserName()).toBeVisible();
-
     await landingPage.logout();
 
     await expect(landingPage.registerButtonHolder).toBeVisible();

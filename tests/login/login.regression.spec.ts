@@ -14,23 +14,23 @@ test.describe('Login Regression', () => {
     await landingPage.openLogin();
     loginPage = new LoginPage(page);
 
-  });
+  }); //fail condition message;
 
-test('one word login details', async ({ page }) => {
+test('one word login details', async () => {
   await loginPage.login(loginData.oneWordFields.username, loginData.oneWordFields.password);
 
   await expect(loginPage.alertIcon).toBeVisible();
 
   });
 
-test('login with username only', async ({ page }) => {
+test('login with username only', async () => {
   await loginPage.login(loginData.invalidUser.username, ' ');
 
-  await expect(loginPage.alertIcon).toBeVisible();
+  await expect(loginPage.alertIcon).toBeVisible();// to be disabled
 });
 
 
-test('login with password only', async ({ page }) => {
+test('login with password only', async () => {
   await loginPage.login(' ', loginData.invalidUser.password);
 
   await expect(loginPage.alertIcon).toBeVisible();
@@ -38,7 +38,7 @@ test('login with password only', async ({ page }) => {
 
 });
 
-  test('wrong login details', async ({ page }) => {
+  test('wrong login details', async () => {
 
     await loginPage.login(loginData.wrongUser.username, loginData.wrongUser.password);
 
@@ -46,7 +46,7 @@ test('login with password only', async ({ page }) => {
 
   });
 
-  test('login with very long credentials', async ({ page }) => {
+  test('login with very long credentials', async () => {
 
     await loginPage.login(loginData.longInputs.username, loginData.longInputs.password);
 
