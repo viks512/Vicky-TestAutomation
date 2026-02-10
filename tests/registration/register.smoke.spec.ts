@@ -1,35 +1,30 @@
 import { test, expect } from "@playwright/test";
-import { LandingPage } from "../pages/landingPage";
-import { RegisterModal } from "../pages/registerModal";
-import { Navigation } from "../pages/navigationComponent";
+import { RegisterPage } from "../../pages/registerPage";
+import { LandingPage } from '../../pages/landingPage';
+
+
 
 test.describe('Register Smoke Tests', () => {
   let landingPage: LandingPage;
-  let registerModal: RegisterModal;
-  let navigation: Navigation;
+  let registerPage: RegisterPage;
 
   test.beforeEach(async ({ page }) => {
     landingPage = new LandingPage(page);
-    await landingPage.navigateToHomepage(); // zashto
-    registerModal = await landingPage.openRegister();
+    await landingPage.navigateToHomepage();
+    registerPage = await landingPage.openRegister();
   });
 
   test('registration', async ({ page }) => {
 
-    await registerModal.registerUser(
-      'v@fsdf.com',
-      "Test1234!",
+    await registerPage.fillRegistrationFormFieldWithWrongDetails(
+      '-------',
+      '------',
       'TestUser',
       'Test',
       'User',
       '01',
       '01',
-      '1990',
-      '123 Test St',
-      'Test City',
-      '12345',
-      'US',
-      '1234567890'
+      '1990'
     );
 
     await expect(landingPage.getLoggedUserName()).toBeVisible({ timeout: 15000 });
@@ -38,9 +33,9 @@ test.describe('Register Smoke Tests', () => {
 
   test('register button visible', async ({ page }) => {
 
-    const registerButton = page.locator('.register-button-holder #buttonHeaderRegister');
+    await expect(landingPage.registerButtonHolder).toBeVisible( { timeout: 10000 });
 
-    await expect(registerButton).toBeVisible();
+    
   });
 
 });

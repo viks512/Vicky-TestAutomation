@@ -1,4 +1,5 @@
 import { FrameLocator, Locator, Page } from '@playwright/test';
+import { BasePage } from './basePage';
 
 const REGISTER_MODAL_SELECTORS = {
     iframe: `iframe#newRegistrationIframe`,
@@ -20,12 +21,19 @@ const REGISTER_MODAL_TEST_IDS = {
     phone: 'phone',
     acceptTermsAndConditions: 'acceptTermsAndConditions',
     acceptAttestation: 'acceptAttestation',
-    registrationSubmitButton: 'registration-submit-button'
+    registrationSubmitButton: 'registration-submit-button',
+
+    playButton: 'play-button',
+    emailInputError: 'input-email-error',
+    passwordInputError: 'input-password-error',
+    userNameInputError: 'input-userName-error',
 
 };
 
-export class RegisterModal {
-    constructor(private page: Page) {}
+export class RegisterPage extends BasePage {
+    constructor(page: Page) {
+        super(page);
+    }
 
     private iframe():FrameLocator {
         return this.page.frameLocator(REGISTER_MODAL_SELECTORS.iframe);
@@ -48,7 +56,14 @@ export class RegisterModal {
     private readonly infoCheckbox: Locator = this.iframe().getByTestId(REGISTER_MODAL_TEST_IDS.acceptAttestation);
     private readonly createAccountButton: Locator = this.iframe().getByTestId(REGISTER_MODAL_TEST_IDS.registrationSubmitButton);
 
-     async registerUser(
+    private readonly playButton: Locator = this.iframe().getByTestId(REGISTER_MODAL_TEST_IDS.playButton);
+    private readonly emailError: Locator = this.iframe().getByTestId(REGISTER_MODAL_TEST_IDS.emailInputError);
+    private readonly passwordError: Locator = this.iframe().getByTestId(REGISTER_MODAL_TEST_IDS.passwordInputError);
+    private readonly userNameError: Locator = this.iframe().getByTestId(REGISTER_MODAL_TEST_IDS.userNameInputError);
+
+    
+
+     async registerUser( 
         email: string,
         password:  string,
         username: string,
@@ -60,7 +75,6 @@ export class RegisterModal {
         address: string,
         city: string,
         zipCode: string,
-        countryCode: string,
         phone: string
     ) {
         this.fillRegistrationFormField(
@@ -75,7 +89,6 @@ export class RegisterModal {
             address,
             city,
             zipCode,
-            countryCode,
             phone
         );
  
@@ -94,7 +107,6 @@ export class RegisterModal {
         address: string,
         city: string,
         zipCode: string,
-        countryCode: string,
         phone: string
     ) {
         await this.emailField.fill(email);
@@ -108,9 +120,73 @@ export class RegisterModal {
         await this.addressInput.fill(address);
         await this.cityFieldInput.fill(city);
         await this.zipCodeFieldInput.fill(zipCode);
-        await this.countryDropdown.selectOption(countryCode);
         await this.phoneFieldInput.fill(phone);
         await this.termsCheckbox.check();
         await this.infoCheckbox.check();
+    }
+
+        async fillRegistrationFormFieldWithWrongDetails(
+        email: string,
+        password:  string,
+        username: string,
+        firstName: string,
+        lastName: string,
+        birthMonth: string,
+        birthDay: string,
+        birthYear: string,
+    ) {
+        await this.emailField.fill(email);
+        await this.passwordFieldInput.fill(password);
+        await this.usernameFieldInput.fill(username);
+        await this.firstNameFieldInput.fill(firstName);
+        await this.lastNameFieldInput.fill(lastName);
+        await this.birthdayMonthFieldInput.fill(birthMonth);
+        await this.birthdayDayFieldInput.fill(birthDay);
+        await this.birthdayYearFieldInput.fill(birthYear);
+    }
+
+        async fillRegistrationFormFieldWithoutCheckboxes(
+        email: string,
+        password:  string,
+        username: string,
+        firstName: string,
+        lastName: string,
+        birthMonth: string,
+        birthDay: string,
+        birthYear: string,
+        address: string,
+        city: string,
+        zipCode: string,
+        phone: string
+    ) {
+        await this.emailField.fill(email);
+        await this.passwordFieldInput.fill(password);
+        await this.usernameFieldInput.fill(username);
+        await this.firstNameFieldInput.fill(firstName);
+        await this.lastNameFieldInput.fill(lastName);
+        await this.birthdayMonthFieldInput.fill(birthMonth);
+        await this.birthdayDayFieldInput.fill(birthDay);
+        await this.birthdayYearFieldInput.fill(birthYear);
+        await this.addressInput.fill(address);
+        await this.cityFieldInput.fill(city);
+        await this.zipCodeFieldInput.fill(zipCode);
+        await this.phoneFieldInput.fill(phone);
+    }
+
+
+    async getEmailError() {
+        return this.emailError;
+    }
+        
+    async getPasswordError() {
+        return this.passwordError;
+    }
+
+    async getUsernameError() {
+        return this.userNameError;
+    }
+
+    async getCreateAccountButton() {
+        return this.createAccountButton;
     }
 }

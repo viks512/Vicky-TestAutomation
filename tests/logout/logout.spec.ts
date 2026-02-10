@@ -3,7 +3,7 @@ import { LandingPage } from '../../pages/landingPage';
 import { LoginPage } from "../../pages/loginPage2";
 import { loginData } from "../loginData";
 
-test.describe('Login Smoke', () => {
+test.describe('Logout', () => {
   
   let landingPage: LandingPage;
   let loginPage: LoginPage;
@@ -15,13 +15,14 @@ test.describe('Login Smoke', () => {
       await landingPage.openLogin();
   });
 
-  test('login', async ({ page }) => {
+  test('logout', async ({ page }) => {
     await loginPage.login(loginData.validUser.username, loginData.validUser.password);
 
     await expect(loginPage.getLoggedUserName()).toBeVisible();
+
+    await landingPage.logout();
+
+    await expect(landingPage.registerButtonHolder).toBeVisible();
   });
 
-  test('submit button visible', async ({ page }) => {
-    await expect(loginPage.submitButton).toBeVisible();
-  });
 });
